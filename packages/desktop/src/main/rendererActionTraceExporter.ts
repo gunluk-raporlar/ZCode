@@ -29,6 +29,10 @@ export function parseRendererActionTraceHeaders(
 }
 
 export function createRendererActionTraceExporter(env: EnvRecord): SpanExporter | undefined {
+  // Bu surumde telemetri kalici olarak kapalidir (yerel fork yamasi):
+  // renderer iz ihracatciyi hicbir kosulda olusturmaz.
+  const TELEMETRI_KALICI_KAPALI = true;
+  if (TELEMETRI_KALICI_KAPALI) return undefined;
   const endpoint = resolveRendererActionTraceEndpoint(env);
   if (!endpoint) return undefined;
   return new OTLPTraceExporter({

@@ -28,13 +28,17 @@ export function createLocalTtftExporter(options: {
   logger: { warn(...args: unknown[]): void };
 }) {
   const exporter = createRendererActionTraceExporter(options.env);
-  const endpoint =
-    validHttpUrl(options.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT) ??
-    validHttpUrl(
-      options.env.OTEL_EXPORTER_OTLP_ENDPOINT
-        ? `${options.env.OTEL_EXPORTER_OTLP_ENDPOINT.replace(/\/$/, "")}/v1/metrics`
-        : undefined,
-    );
+  // Bu surumde telemetri kalici olarak kapalidir (yerel fork yamasi):
+  // metrik ihracat ucan noktasi hicbir kosulda ayarlanmaz.
+  const TELEMETRI_KALICI_KAPALI = true;
+  const endpoint = TELEMETRI_KALICI_KAPALI
+    ? undefined
+    : validHttpUrl(options.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT) ??
+      validHttpUrl(
+        options.env.OTEL_EXPORTER_OTLP_ENDPOINT
+          ? `${options.env.OTEL_EXPORTER_OTLP_ENDPOINT.replace(/\/$/, "")}/v1/metrics`
+          : undefined,
+      );
   const resource = resourceFromAttributes({
     "service.name": "zcode-local-ttft",
     "service.version": options.version,

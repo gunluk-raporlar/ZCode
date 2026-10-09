@@ -121,7 +121,14 @@ export async function prepareModelTelemetryEnv(
   env: EnvRecord,
   options: PrepareModelTelemetryOptions = {},
 ): Promise<EnvRecord> {
-  if (!resolveOtlpTraceEndpoint(env) || isExplicitlyDisabled(env.ZCODE_MODEL_TELEMETRY_ENABLED)) {
+  // Bu surumde telemetri kalici olarak kapalidir (yerel fork yamasi).
+  // OTLP ihracati hicbir kosulda baslatilmaz; ayrintili aciklama commit mesajinda.
+  const TELEMETRI_KALICI_KAPALI = true;
+  if (
+    TELEMETRI_KALICI_KAPALI ||
+    !resolveOtlpTraceEndpoint(env) ||
+    isExplicitlyDisabled(env.ZCODE_MODEL_TELEMETRY_ENABLED)
+  ) {
     return env;
   }
   const existingInstallationId = normalizeTelemetryDeviceMid(env.ZCODE_TELEMETRY_DEVICE_MID);
