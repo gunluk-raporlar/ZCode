@@ -3,11 +3,12 @@ import type { Locale } from "@zcode/shared";
 import { TID_LOCALE_TOGGLE } from "@zcode/shared";
 import { useZCodeIntl } from "./IntlProvider.js";
 
-const LOCALE_CYCLE: Locale[] = ["zh-CN", "en-US"];
+const LOCALE_CYCLE: Locale[] = ["zh-CN", "en-US", "tr-TR"];
 
 const LOCALE_LABELS: Record<Locale, string> = {
   "zh-CN": "中",
   "en-US": "En",
+  "tr-TR": "Tr",
 };
 
 /**

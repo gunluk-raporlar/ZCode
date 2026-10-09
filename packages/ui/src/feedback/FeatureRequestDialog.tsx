@@ -135,7 +135,7 @@ export const FeatureRequestDialog = memo(function FeatureRequestDialogComponent(
         ticketSeverity: "P3-低",
         ticketModule: "其它",
         modelContext: {},
-        locale,
+        locale: locale === "tr-TR" ? "en-US" : locale,
         copy,
         formatMessage: intl.formatMessage,
         onCompleted: (ticketId) => {

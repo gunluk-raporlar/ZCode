@@ -26,7 +26,7 @@ import {
   type CodingPlanPurchaseAudience,
   CODING_PLAN_WEBVIEW_OVERRIDE_ENV_KEY,
 } from "@/settings/model-provider-section/codingPlanEmbeddedWebview.js";
-import { CodingPlanWebviewChannels, type CodingPlanPurchaseCompletePayload } from "@zcode/shared";
+import { CodingPlanWebviewChannels, type CodingPlanPurchaseCompletePayload, type CodingPlanWebviewLocale } from "@zcode/shared";
 
 interface CodingPlanEmbeddedWebviewDialogProps {
   credentialService: {
@@ -83,7 +83,8 @@ export function CodingPlanEmbeddedWebviewDialog({
   const onOpenResultRef = useRef(onOpenResult);
   onOpenResultRef.current = onOpenResult;
   // 当前 locale 作为 webview 语言 hint / 注入值；Locale 与 CodingPlanWebviewLocale 同构。
-  const webviewLocale = locale;
+  // Kodlama Planı webview arayüzü yalnızca zh/en konuşuyor; Türkçe tercihinde İngilizceye düşer.
+  const webviewLocale: CodingPlanWebviewLocale = locale === "tr-TR" ? "en-US" : locale;
   const webviewCleanupRef = useRef<(() => void) | null>(null);
   // webview 是否已 dom-ready：executeJavaScript 只在 ready 后调用，
   // 否则会抛 "WebView must be attached to the DOM and dom-ready emitted"。

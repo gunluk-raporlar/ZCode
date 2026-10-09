@@ -44,5 +44,7 @@ export async function resolveWebCommunityUrl(
   locale: Locale,
   options: ResolveWebCommunityUrlOptions = {},
 ): Promise<string | undefined> {
-  return (await resolveWebHelpConfig(options)).community_urls?.[locale];
+  // Türkçe topluluk girişi tanımlı değilse İngilizce girişe düş (fork yamasi).
+  const communityKey = locale === "tr-TR" ? "en-US" : locale;
+  return (await resolveWebHelpConfig(options)).community_urls?.[communityKey];
 }

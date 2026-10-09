@@ -107,7 +107,7 @@ export function ProviderTemplatePicker({
                 />
               ) : null}
               {group.templates.map((template) => {
-                const label = resolveProviderTemplateName(template.templateId, template, locale);
+                const label = resolveProviderTemplateName(template.templateId, template, locale === "tr-TR" ? "en-US" : locale);
                 return (
                   <ProviderTemplateCard
                     key={template.templateId}

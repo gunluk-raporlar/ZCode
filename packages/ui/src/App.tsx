@@ -800,7 +800,7 @@ export function App({
       ...taskListE2EActions,
       getTheme: () => theme,
       setTheme,
-      getLocale: () => locale,
+      getLocale: () => (locale === "tr-TR" ? "en-US" : locale),
       setLocale,
       setChatMessages: (messages) => {
         setTestMessages([...messages]);

@@ -127,7 +127,7 @@ async function renderConversationSharePage(): Promise<void> {
     root.render(
       <ConversationShareLandingStatus
         state={{ kind: "error", error: "invalid_contract" }}
-        locale={routeLocale}
+        locale={routeLocale === "tr-TR" ? "en-US" : routeLocale}
       />,
     );
     return;
@@ -181,7 +181,7 @@ async function renderConversationSharePage(): Promise<void> {
         });
       }}
       onLogout={onLogout}
-      locale={routeLocale}
+      locale={routeLocale === "tr-TR" ? "en-US" : routeLocale}
       theme={resolveWebThemePreference("zai-light")}
     />,
   );

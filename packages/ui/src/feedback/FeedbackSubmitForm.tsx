@@ -265,7 +265,7 @@ export function FeedbackSubmitForm({
         ticketSeverity,
         ticketModule,
         modelContext,
-        locale,
+        locale: locale === "tr-TR" ? "en-US" : locale,
         copy: submissionCopy,
         formatMessage: intl.formatMessage,
         onTicketCreated: shouldCloseOnTicketCreated
