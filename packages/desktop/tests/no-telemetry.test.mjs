@@ -39,7 +39,7 @@ async function loadModule(relative, imports) {
   const { transpileModule, ModuleKind } = await import("typescript");
   const source = await readFile(new URL(relative, root), "utf8");
   const output = transpileModule(source, {
-    compilerOptions: { module: ModuleKind.CommonJS },
+    compilerOptions: { module: ModuleKind.CommonJS, target: 99 /* ES2022 — gercek derleme hedefiyle ayni; ES5 emit for-of over Set tuzağına düşmesin */ },
   }).outputText;
   const exports = {};
   new Function("require", "exports", output)((name) => {
