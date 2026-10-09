@@ -6814,6 +6814,9 @@ const enUS: Record<string, string> = {
   "scheduledPreview.toast.running": "Running “{title}”…",
   "scheduledPreview.toast.view": "View",
   "scheduledPreview.addSchedule": "Add schedule",
+  "settings.locale.tr-TR": "Türkçe",
+  "sidebar.settings.locale.tr-TR": "Türkçe",
+
 };
 
 export default enUS;

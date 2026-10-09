@@ -6492,6 +6492,9 @@ const zhCN: Record<string, string> = {
   "scheduledPreview.toast.running": "正在运行“{title}”…",
   "scheduledPreview.toast.view": "查看",
   "scheduledPreview.addSchedule": "添加计划",
+  "settings.locale.tr-TR": "Türkçe",
+  "sidebar.settings.locale.tr-TR": "Türkçe",
+
 };
 
 export default zhCN;

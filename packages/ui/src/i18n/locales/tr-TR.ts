@@ -6790,6 +6790,9 @@ const trTR: Record<string, string> = {
   "scheduledPreview.toast.running": "“{title}” çalışıyor…",
   "scheduledPreview.toast.view": "Görüntüle",
   "scheduledPreview.addSchedule": "Zamanlama ekle",
+  "settings.locale.tr-TR": "Türkçe",
+  "sidebar.settings.locale.tr-TR": "Türkçe",
+
 };
 
 export default trTR;

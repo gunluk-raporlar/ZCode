@@ -65,7 +65,7 @@ function resolveBoundaryLocale(): Locale {
   if (typeof localStorage !== "undefined" && typeof localStorage.getItem === "function") {
     try {
       const storedPreference = localStorage.getItem(LOCALE_PREFERENCE_KEY);
-      if (storedPreference === "zh-CN" || storedPreference === "en-US") {
+      if (storedPreference === "zh-CN" || storedPreference === "en-US" || storedPreference === "tr-TR") {
         return storedPreference;
       }
     } catch {
@@ -76,7 +76,8 @@ function resolveBoundaryLocale(): Locale {
   }
 
   if (typeof navigator !== "undefined") {
-    return navigator.language.toLowerCase().startsWith("zh") ? "zh-CN" : "en-US";
+    const l = navigator.language.toLowerCase();
+    return l.startsWith("zh") ? "zh-CN" : l.startsWith("tr") ? "tr-TR" : "en-US";
   }
 
   return DEFAULT_LOCALE;
