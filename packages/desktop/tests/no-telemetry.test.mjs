@@ -18,7 +18,7 @@ test("desktop cannot initialize telemetry exporters or forwarding bridges", asyn
     const content = await readFile(file, "utf8");
     assert.doesNotMatch(
       content,
-      /@arms\/rum-electron|@opentelemetry\/|createTelemetryCore|createDesktopTelemetryFetch|installArmsRumBridgeIpcForward|new NetworkTelemetryChannelServer|registerHostNetworkTelemetry/,
+      /@arms\/rum-electron|@opentelemetry\/|createTelemetryCore|createDesktopTelemetryFetch|installArmsRumBridgeIpcForward|NetworkTelemetryChannelServer|NetworkTelemetryChannelClient|setNetworkTelemetrySink|network-telemetry-middleware|registerHostNetworkTelemetry/,
       file.pathname,
     );
     assert.doesNotMatch(
@@ -32,6 +32,22 @@ test("desktop cannot initialize telemetry exporters or forwarding bridges", asyn
     Object.keys(manifest.dependencies).some((name) => /^@(?:arms|opentelemetry)\//.test(name)),
     false,
   );
+});
+
+test("RPC ag-telemetri zinciri yeniden baglanamaz durumda (rpc + services kaynaklari)", async () => {
+  // Kabul olcutu: telemetriyi yeniden etkinlestirmek icin silinen altyapinin
+  // bilinçli olarak yeniden yazilmasi gerekir; mevcut bir sink'i yanlislikla
+  // baglamak yetmemeli. Bu sembollerin depoda bulunmasi bile yasaktir.
+  for (const dir of [new URL("../rpc/src/", root), new URL("../services/src/", root)]) {
+    for (const file of await sources(dir)) {
+      const content = await readFile(file, "utf8");
+      assert.doesNotMatch(
+        content,
+        /setNetworkTelemetrySink|NetworkTelemetryChannelServer|NetworkTelemetryChannelClient|network-telemetry-middleware/,
+        file.pathname,
+      );
+    }
+  }
 });
 
 // 以 Electron 边界替身执行真实模块，检查删除旁路后业务事件仍能流转。
