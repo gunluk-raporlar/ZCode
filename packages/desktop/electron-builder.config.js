@@ -681,6 +681,13 @@ export default {
       "[/\\\\]Contents[/\\\\]Resources[/\\\\]tools([/\\\\]|$)",
     ],
   },
+  // Windows paketleme araç seti: eski "0.0.0" (winCodeSign) arsivi mac symlink'leri
+  // icerdigi icin yonetici izni olmadan acilamiyor; "1.1.0" Windows Kits arsivi
+  // yerel imzasiz paketleme icin gerekli rcedit/manifest'leri icerir ve symlink istemez.
+  // (fork yamasi — yerel derleme icin)
+  toolsets: {
+    winCodeSign: "1.1.0",
+  },
   win: {
     target: ["nsis"],
     artifactName: buildDesktopArtifactName("win"),
